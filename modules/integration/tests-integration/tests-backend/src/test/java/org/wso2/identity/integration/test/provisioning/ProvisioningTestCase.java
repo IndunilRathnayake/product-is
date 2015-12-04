@@ -234,7 +234,7 @@ public class ProvisioningTestCase extends ISIntegrationTest {
         generatePassword.setValue("true");
 
         Property[] proProperties = new Property[]{userNameProp, passwordProp, userEpProp,
-                groupEpProp, generatePassword, null};
+                groupEpProp, null, generatePassword, null};
         proConnector.setProvisioningProperties(proProperties);
         fedIdp.setProvisioningConnectorConfigs(new ProvisioningConnectorConfig[]{proConnector});
 
