@@ -17,14 +17,10 @@
 package org.wso2.is.portal.user.client.api.internal;
 
 import org.osgi.framework.BundleContext;
-import org.osgi.service.component.annotations.Activate;
-import org.osgi.service.component.annotations.Component;
-import org.osgi.service.component.annotations.Deactivate;
-import org.osgi.service.component.annotations.Reference;
-import org.osgi.service.component.annotations.ReferenceCardinality;
-import org.osgi.service.component.annotations.ReferencePolicy;
+import org.osgi.service.component.annotations.*;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
+import org.wso2.carbon.identity.meta.claim.mgt.service.ProfileMgtService;
 import org.wso2.carbon.identity.mgt.RealmService;
 import org.wso2.is.portal.user.client.api.IdentityStoreClientService;
 import org.wso2.is.portal.user.client.api.IdentityStoreClientServiceImpl;
@@ -73,6 +69,20 @@ public class UserPortalClientApiComponent {
     protected void unsetRealmService(RealmService realmService) {
 
         UserPortalClientApiDataHolder.getInstance().setRealmService(null);
+    }
+
+    @Reference(
+            name = "profileMgtService",
+            service = ProfileMgtService.class,
+            cardinality = ReferenceCardinality.MANDATORY,
+            policy = ReferencePolicy.DYNAMIC,
+            unbind = "unsetProfileMgtService")
+    protected void setProfileMgtService(ProfileMgtService profileMgtService) {
+        UserPortalClientApiDataHolder.getInstance().setProfileMgtService(profileMgtService);
+    }
+
+    protected void unsetProfileMgtService(ProfileMgtService profileMgtService) {
+        UserPortalClientApiDataHolder.getInstance().setProfileMgtService(null);
     }
 
     private void initializeClientServices(BundleContext bundleContext) {
