@@ -29,15 +29,51 @@ import java.util.List;
  */
 public interface ChallengeQuestionManagerClientService {
 
-    List<ChallengeQuestion> getChallengeQuestionList() throws IdentityRecoveryException;
+    /**
+     * Get all of the available challenge questions for user.
+     * @param userUniqueId User's unique ID.
+     * @return List of challenge questions.
+     * @throws IdentityRecoveryException Exception in recovery component.
+     * @throws IdentityStoreException Exception in identity management component.
+     * @throws UserNotFoundException User not found.
+     */
+    List<ChallengeQuestion> getChallengeQuestionList(String userUniqueId) throws IdentityRecoveryException,
+            IdentityStoreException, UserNotFoundException;
 
+    /**
+     * Get all challenge questions answered by the specific user.
+     * @param userUniqueId User's unique ID.
+     * @return List of challenge questions.
+     * @throws IdentityStoreException Exception in identity management component.
+     * @throws UserNotFoundException User not found.
+     * @throws IdentityRecoveryException Exception in recovery component.
+     */
     List<ChallengeQuestion> getAllChallengeQuestionsForUser(String userUniqueId)
             throws IdentityStoreException, UserNotFoundException, IdentityRecoveryException;
 
+    /**
+     * Set challenge question for user.
+     * @param userUniqueId User's unique ID.
+     * @param questionId Question id.
+     * @param questionSetId Question set ID.
+     * @param answer User's answer.
+     * @throws IdentityStoreException Exception in identity management component.
+     * @throws UserNotFoundException User not found.
+     * @throws IdentityRecoveryException Exception in recovery component.
+     */
     void setChallengeQuestionForUser(String userUniqueId, String questionId, String questionSetId, String answer)
             throws IdentityStoreException, UserNotFoundException, IdentityRecoveryException;
 
-    void deleteChallengeQuestionForUser(String userUniqueId, String questionId)
+    /**
+     * Delete the specific question that user answered.
+     * @param userUniqueId User's unique id.
+     * @param questionId Question id.
+     * @param questionSetId Question set id.
+     * @throws IdentityRecoveryException Exception in recovery component.
+     * @throws IdentityStoreException Exception in identity management component.
+     * @throws UserNotFoundException User not found.
+     */
+    void deleteChallengeQuestionForUser(String userUniqueId, String questionId, String questionSetId)
             throws IdentityRecoveryException, IdentityStoreException, UserNotFoundException;
 
     UserChallengeAnswer[] getChallengeAnswersOfUser(String userUniqueId) throws IdentityRecoveryException,
