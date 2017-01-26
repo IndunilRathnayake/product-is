@@ -14,7 +14,6 @@
  * limitations under the License.
  */
 
-
 package org.wso2.is.portal.user.client.api;
 
 import org.osgi.framework.BundleContext;
