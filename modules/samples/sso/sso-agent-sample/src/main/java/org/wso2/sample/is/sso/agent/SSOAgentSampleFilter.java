@@ -60,6 +60,8 @@ public class SSOAgentSampleFilter extends SSOAgentFilter {
                 httpBinding = "urn:oasis:names:tc:SAML:2.0:bindings:HTTP-POST";
             } else if ("HTTP-Redirect".equals(httpBinding)) {
                 httpBinding = "urn:oasis:names:tc:SAML:2.0:bindings:HTTP-Redirect";
+            } else if ("HTTP-Artifact".equals(httpBinding)) {
+                httpBinding = "urn:oasis:names:tc:SAML:2.0:bindings:HTTP-Artifact";
             } else {
                 LOGGER.log(Level.INFO, "Unknown SAML2 HTTP Binding. Defaulting to HTTP-POST");
                 httpBinding = "urn:oasis:names:tc:SAML:2.0:bindings:HTTP-POST";
